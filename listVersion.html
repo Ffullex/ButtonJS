@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body{
+      background-color: #f1eff3;
+    }
+
+    .block{
+      position: absolute;
+      cursor: pointer;
+      z-Index: 1000;
+      left: 45%;
+      top: 10%;
+      width: 100px;
+      height: 100px;
+      border: none;
+      outline: none;
+      border-radius: 15%;
+      background-color: #f1eff3;
+      box-shadow: 5px 5px 10px #d9d7db, -5px -5px 10px #fdfcfe;
+    }
+    .block:active {
+      box-shadow: inset 20px 20px 10px #d9d7db,
+      inset -20px -20px 10px #fdfcfe ;
+    }
+
+  </style>
+  <title>Block</title>
+</head>
+<body>
+<button class="block" id="block" onmousedown="return false"> </button>
+
+<script>
+  let block = document.getElementById('block');
+
+  block.onmousedown = function(event) {
+
+    let shiftX = event.clientX - block.getBoundingClientRect().left;
+    let shiftY = event.clientY - block.getBoundingClientRect().top;
+
+    function moveAt(pageX, pageY) {
+      block.style.left = pageX - shiftX + 'px';
+      block.style.top = pageY - shiftY + 'px';
+    }
+
+    function onMouseMove(event) {
+      moveAt(event.pageX, event.pageY);
+    }
+
+    document.addEventListener('mousemove', onMouseMove);
+
+    block.onmouseup = function() {
+      document.removeEventListener('mousemove', onMouseMove);
+      block.onmouseup = null;
+    };
+  };
+
+  block.ondragstart = function() {
+    return false;
+  };
+
+</script>
+</body>
+</html>

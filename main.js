@@ -1,34 +1,36 @@
-let square = document.getElementById('square');
-square.onmousedown = function(event) {
+let block = document.getElementById('block');
 
-    let shiftX = event.clientX - square.getBoundingClientRect().left;
-    let shiftY = event.clientY - square.getBoundingClientRect().top;
+// обработка события "при нажатой ЛКМ"
+block.onmousedown = function(event) {
 
-    square.style.position = 'absolute';
-    square.style.zIndex = 1000;
-    document.body.append(square);
-    moveAt(event.pageX, event.pageY);
+    // Сдвиги по X и Y, отнимаем от клиентских координат размер и позицию block
+    // Нужны для того, чтобы избежать центрирования курсора
+    let shiftX = event.clientX - block.getBoundingClientRect().left;
+    let shiftY = event.clientY - block.getBoundingClientRect().top;
 
+    // Двигает block по экрану, меняя его координаты
     function moveAt(pageX, pageY) {
-        square.style.left = pageX - shiftX + 'px';
-        square.style.top = pageY - shiftY + 'px';
+        block.style.left = pageX - shiftX + 'px';
+        block.style.top = pageY - shiftY + 'px';
     }
 
+    // вызывает функцию moveAt при обработке события
     function onMouseMove(event) {
         moveAt(event.pageX, event.pageY);
     }
-    // передвигаем square при событии mousemove
+
+    // регистрирует событие "движение мыши", вызывает функцию, которая тащит block
     document.addEventListener('mousemove', onMouseMove);
 
-    // отпустить square, удалить ненужные обработчики
-    square.onmouseup = function() {
+    // отпускает block, удаляет ненужные обработчики
+    block.onmouseup = function() {
         document.removeEventListener('mousemove', onMouseMove);
-        square.onmouseup = null;
+        block.onmouseup = null;
     };
-
 };
 
-square.ondragstart = function() {
+// отключает Drag`n`Drop браузера, чтобы не было конфликта
+block.ondragstart = function() {
     return false;
 };
 

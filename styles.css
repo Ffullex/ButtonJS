@@ -2,8 +2,12 @@ body{
     background-color: #f1eff3;
 }
 
-.square{
+.block{
+    position: absolute;
     cursor: pointer;
+    z-Index: 1000;
+    left: 45%;
+    top: 10%;
     width: 100px;
     height: 100px;
     border: none;
@@ -12,7 +16,7 @@ body{
     background-color: #f1eff3;
     box-shadow: 5px 5px 10px #d9d7db, -5px -5px 10px #fdfcfe;
 }
-.square:active {
+.block:active {
     box-shadow: inset 20px 20px 10px #d9d7db,
     inset -20px -20px 10px #fdfcfe ;
 }
