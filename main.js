@@ -14,9 +14,11 @@ block.onmousedown = function(event) {
         block.style.top = pageY - shiftY + 'px';
     }
 
+
     // вызывает функцию moveAt при обработке события
+    // осуществляет плавное передвижение блока
     function onMouseMove(event) {
-        moveAt(event.pageX, event.pageY);
+        return setTimeout(moveAt, 100, event.pageX, event.pageY);
     }
 
     // регистрирует событие "движение мыши", вызывает функцию, которая тащит block
