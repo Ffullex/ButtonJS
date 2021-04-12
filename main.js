@@ -24,6 +24,7 @@ block.onmousedown = function (event) {
     }
 
     // регистрирует событие "движение мыши", вызывает функцию, которая тащит block
+    // при отпускании сразу вызывает функцию onMouseUp
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
 
