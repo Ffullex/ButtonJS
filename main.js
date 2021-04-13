@@ -1,6 +1,5 @@
 let block = document.getElementById('block');
 
-
 block.onmousedown = function (event) {
     // двигает block по экрану, меняя его координаты
     function moveAt(pageX, pageY) {
