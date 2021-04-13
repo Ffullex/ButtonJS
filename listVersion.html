@@ -35,13 +35,6 @@
   let block = document.getElementById('block');
 
   block.onmousedown = function (event) {
-
-    event.preventDefault();
-
-    let shiftX = event.clientX - block.getBoundingClientRect().left;
-    let shiftY = event.clientY - block.getBoundingClientRect().top;
-
-
     function moveAt(pageX, pageY) {
       block.style.left = pageX - shiftX + 'px';
       block.style.top = pageY - shiftY + 'px';
@@ -51,16 +44,22 @@
       setTimeout(moveAt, 100, event.pageX, event.pageY);
     }
 
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-
     function onMouseUp() {
       document.removeEventListener('mouseup', onMouseUp);
       document.removeEventListener('mousemove', onMouseMove);
     }
+
+    event.preventDefault();
+
+    const { left, top } = block.getBoundingClientRect();
+    let shiftX = event.clientX - left;
+    let shiftY = event.clientY - top;
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+
   };
 
-  // отключает Drag`n`Drop браузера, чтобы не было конфликта
   block.ondragstart = function() {
     return false;
   };
